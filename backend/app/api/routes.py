@@ -89,6 +89,19 @@ def post_donation(payload: DonationCreate, db: Session = Depends(get_db)):
     )
 
 
+@router.post("/donations/{donation_id}/picked-up", response_model=DonationOut)
+def confirm_pickup(donation_id: int, db: Session = Depends(get_db)):
+    donation = db.query(Donation).filter(Donation.id == donation_id).first()
+    if not donation:
+        raise HTTPException(status_code=404, detail="Donation not found")
+    if donation.status not in {"posted", "matched"}:
+        raise HTTPException(status_code=400, detail="Cannot confirm pickup from current status")
+    donation.status = "picked_up"
+    db.commit()
+    db.refresh(donation)
+    return DonationOut.model_validate(donation)
+
+
 @router.get("/donations/{donation_id}", response_model=DonationStatusOut)
 def get_donation_status(donation_id: int, db: Session = Depends(get_db)):
     donation = db.query(Donation).filter(Donation.id == donation_id).first()

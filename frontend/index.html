@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Food Surplus Matcher</title>
+  <link rel="stylesheet" href="/ui/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Food Surplus Matcher</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Register Nonprofit</h2>
+      <form id="nonprofit-form">
+        <div class="row">
+          <label>Name <input name="name" required /></label>
+          <label>Address <input name="address" required /></label>
+        </div>
+        <div class="row">
+          <label>Latitude <input name="latitude" type="number" step="any" required /></label>
+          <label>Longitude <input name="longitude" type="number" step="any" required /></label>
+        </div>
+        <div class="row">
+          <label>Phone <input name="contact_phone" /></label>
+          <label>Email <input name="contact_email" type="email" /></label>
+        </div>
+        <div class="row">
+          <label>Windows (HH:MM-HH:MM, comma separated)
+            <input name="windows" placeholder="09:00-12:00,14:00-18:00" />
+          </label>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <pre id="nonprofit-result" class="result"></pre>
+    </section>
+
+    <section>
+      <h2>Post Donation</h2>
+      <form id="donation-form">
+        <div class="row">
+          <label>Donor Name <input name="donor_name" required /></label>
+          <label>Address <input name="address" required /></label>
+        </div>
+        <div class="row">
+          <label>Latitude <input name="latitude" type="number" step="any" required /></label>
+          <label>Longitude <input name="longitude" type="number" step="any" required /></label>
+        </div>
+        <div class="row">
+          <label>Ready At (ISO) <input name="ready_at" placeholder="2025-10-20T15:00:00Z" required /></label>
+          <label>Expires At (ISO) <input name="expires_at" placeholder="2025-10-20T16:00:00Z" required /></label>
+        </div>
+        <div class="row">
+          <label>Description <input name="food_description" required /></label>
+        </div>
+        <button type="submit">Post Donation</button>
+      </form>
+      <pre id="donation-result" class="result"></pre>
+    </section>
+  </main>
+
+  <script src="/ui/app.js"></script>
+</body>
+</html>
